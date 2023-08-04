@@ -16,6 +16,7 @@
 		BF61CCF92A7D7760009F4A88 /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CCF82A7D7760009F4A88 /* UpcomingViewController.swift */; };
 		BF61CCFB2A7D7797009F4A88 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CCFA2A7D7797009F4A88 /* SearchViewController.swift */; };
 		BF61CCFD2A7D7909009F4A88 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CCFC2A7D7909009F4A88 /* DownloadsViewController.swift */; };
+		BF61CCFF2A7D7DB5009F4A88 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CCFE2A7D7DB5009F4A88 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BF61CCF82A7D7760009F4A88 /* UpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
 		BF61CCFA2A7D7797009F4A88 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		BF61CCFC2A7D7909009F4A88 /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
+		BF61CCFE2A7D7DB5009F4A88 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				BF61CCEA2A7D739C009F4A88 /* Assets.xcassets */,
 				BF61CCEC2A7D739C009F4A88 /* LaunchScreen.storyboard */,
 				BF61CCEF2A7D739C009F4A88 /* Info.plist */,
+				BF61CCFE2A7D7DB5009F4A88 /* Constants.swift */,
 			);
 			path = Netflix;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				BF61CCE42A7D739B009F4A88 /* SceneDelegate.swift in Sources */,
 				BF61CCF92A7D7760009F4A88 /* UpcomingViewController.swift in Sources */,
 				BF61CCF72A7D7737009F4A88 /* HomeViewController.swift in Sources */,
+				BF61CCFF2A7D7DB5009F4A88 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
