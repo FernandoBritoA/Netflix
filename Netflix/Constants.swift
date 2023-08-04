@@ -8,6 +8,8 @@
 enum K {
     enum Home {
         static let title = "Home"
+        
+        static let cellIdentifier = "CollectionViewTableViewCell"
     }
     
     enum Upcoming {

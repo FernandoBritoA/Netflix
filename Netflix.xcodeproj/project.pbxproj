@@ -17,6 +17,7 @@
 		BF61CCFB2A7D7797009F4A88 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CCFA2A7D7797009F4A88 /* SearchViewController.swift */; };
 		BF61CCFD2A7D7909009F4A88 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CCFC2A7D7909009F4A88 /* DownloadsViewController.swift */; };
 		BF61CCFF2A7D7DB5009F4A88 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CCFE2A7D7DB5009F4A88 /* Constants.swift */; };
+		BF61CD062A7DA807009F4A88 /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD052A7DA807009F4A88 /* CollectionViewTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		BF61CCFA2A7D7797009F4A88 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		BF61CCFC2A7D7909009F4A88 /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		BF61CCFE2A7D7DB5009F4A88 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BF61CD052A7DA807009F4A88 /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,11 @@
 		BF61CCE02A7D739B009F4A88 /* Netflix */ = {
 			isa = PBXGroup;
 			children = (
+				BF61CD042A7DA7D6009F4A88 /* Managers */,
+				BF61CD032A7DA7D0009F4A88 /* Resources */,
+				BF61CD022A7DA795009F4A88 /* Models */,
+				BF61CD002A7DA784009F4A88 /* Views */,
+				BF61CD012A7DA78D009F4A88 /* ViewModels */,
 				BF61CCF52A7D7700009F4A88 /* Controllers */,
 				BF61CCE12A7D739B009F4A88 /* AppDelegate.swift */,
 				BF61CCE32A7D739B009F4A88 /* SceneDelegate.swift */,
@@ -85,6 +92,42 @@
 				BF61CCFC2A7D7909009F4A88 /* DownloadsViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BF61CD002A7DA784009F4A88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BF61CD052A7DA807009F4A88 /* CollectionViewTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BF61CD012A7DA78D009F4A88 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BF61CD022A7DA795009F4A88 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BF61CD032A7DA7D0009F4A88 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BF61CD042A7DA7D6009F4A88 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +205,7 @@
 				BF61CCFD2A7D7909009F4A88 /* DownloadsViewController.swift in Sources */,
 				BF61CCE22A7D739B009F4A88 /* AppDelegate.swift in Sources */,
 				BF61CCE42A7D739B009F4A88 /* SceneDelegate.swift in Sources */,
+				BF61CD062A7DA807009F4A88 /* CollectionViewTableViewCell.swift in Sources */,
 				BF61CCF92A7D7760009F4A88 /* UpcomingViewController.swift in Sources */,
 				BF61CCF72A7D7737009F4A88 /* HomeViewController.swift in Sources */,
 				BF61CCFF2A7D7DB5009F4A88 /* Constants.swift in Sources */,
