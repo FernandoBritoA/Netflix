@@ -18,6 +18,7 @@
 		BF61CCFD2A7D7909009F4A88 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CCFC2A7D7909009F4A88 /* DownloadsViewController.swift */; };
 		BF61CCFF2A7D7DB5009F4A88 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CCFE2A7D7DB5009F4A88 /* Constants.swift */; };
 		BF61CD062A7DA807009F4A88 /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD052A7DA807009F4A88 /* CollectionViewTableViewCell.swift */; };
+		BF61CD082A7F049D009F4A88 /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD072A7F049D009F4A88 /* HeroHeaderUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		BF61CCFC2A7D7909009F4A88 /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		BF61CCFE2A7D7DB5009F4A88 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BF61CD052A7DA807009F4A88 /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
+		BF61CD072A7F049D009F4A88 /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				BF61CD052A7DA807009F4A88 /* CollectionViewTableViewCell.swift */,
+				BF61CD072A7F049D009F4A88 /* HeroHeaderUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF61CCFB2A7D7797009F4A88 /* SearchViewController.swift in Sources */,
+				BF61CD082A7F049D009F4A88 /* HeroHeaderUIView.swift in Sources */,
 				BF61CCE62A7D739B009F4A88 /* MainTabBarViewController.swift in Sources */,
 				BF61CCFD2A7D7909009F4A88 /* DownloadsViewController.swift in Sources */,
 				BF61CCE22A7D739B009F4A88 /* AppDelegate.swift in Sources */,

@@ -28,7 +28,9 @@ class HomeViewController: UIViewController {
         homeFeedTable.dataSource = self
         
         // The table header will be the hero
-        homeFeedTable.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        // view.bounds.width = width = 100%
+        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        homeFeedTable.tableHeaderView = headerView
     }
 
     override func viewDidLayoutSubviews() {
