@@ -8,6 +8,10 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    private var lastScrollOffset: CGFloat = 0
+    private var lastScrollUpOffset: CGFloat = 0
+    private var lastScrollDownOffset: CGFloat = 0
+
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
 
@@ -35,7 +39,7 @@ class HomeViewController: UIViewController {
     }
 
     private func configureNavbar() {
-        //UIBarButtonItem(image: <#T##UIImage?#>, style: <#T##UIBarButtonItem.Style#>, target: <#T##Any?#>, action: <#T##Selector?#>)
+        // UIBarButtonItem(image: <#T##UIImage?#>, style: <#T##UIBarButtonItem.Style#>, target: <#T##Any?#>, action: <#T##Selector?#>)
         // We need this for the asset image to load properly. otherwhise it will use all available space
         // https://gist.github.com/sonnguyen0310/6720cbf39ce877c20fea1a987543fb99
         let imageBtn = UIButton(type: .custom)
@@ -56,7 +60,7 @@ class HomeViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
         ]
-        
+
         navigationController?.navigationBar.tintColor = .white
     }
 
@@ -95,5 +99,36 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     // Section header height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let defaultOffset = view.safeAreaInsets.top
+        let offset = scrollView.contentOffset.y + defaultOffset
+
+        let navbarHeight = navigationController?.navigationBar.frame.size.height ?? 44.0
+        let maxDistance = navbarHeight + defaultOffset
+
+        // Scrolling Up
+        if lastScrollOffset > offset {
+            let distance = lastScrollUpOffset - offset
+
+            if distance < maxDistance {
+                navigationController?.navigationBar.transform = .init(translationX: 0, y: distance - maxDistance)
+            }
+
+            lastScrollDownOffset = offset
+
+            // Scrolling DOWN
+        } else {
+            let distance = offset - lastScrollDownOffset
+
+            if distance < maxDistance {
+                navigationController?.navigationBar.transform = .init(translationX: 0, y: -distance)
+            }
+
+            lastScrollUpOffset = offset
+        }
+
+        lastScrollOffset = offset
     }
 }
