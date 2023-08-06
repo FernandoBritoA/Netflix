@@ -8,10 +8,6 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    private var lastScrollOffset: CGFloat = 0
-    private var lastScrollUpOffset: CGFloat = 0
-    private var lastScrollDownOffset: CGFloat = 0
-
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
 
@@ -105,30 +101,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let defaultOffset = view.safeAreaInsets.top
         let offset = scrollView.contentOffset.y + defaultOffset
 
-        let navbarHeight = navigationController?.navigationBar.frame.size.height ?? 44.0
-        let maxDistance = navbarHeight + defaultOffset
-
-        // Scrolling Up
-        if lastScrollOffset > offset {
-            let distance = lastScrollUpOffset - offset
-
-            if distance < maxDistance {
-                navigationController?.navigationBar.transform = .init(translationX: 0, y: distance - maxDistance)
-            }
-
-            lastScrollDownOffset = offset
-
-            // Scrolling DOWN
-        } else {
-            let distance = offset - lastScrollDownOffset
-
-            if distance < maxDistance {
-                navigationController?.navigationBar.transform = .init(translationX: 0, y: -distance)
-            }
-
-            lastScrollUpOffset = offset
-        }
-
-        lastScrollOffset = offset
+        navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
 }
