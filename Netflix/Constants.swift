@@ -15,6 +15,8 @@ enum K {
     
     enum Upcoming {
         static let title = "Coming Soon"
+        
+        static let sectionCellID = "TitleTableViewCell"
     }
     
     enum Search {
