@@ -11,8 +11,7 @@ class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .systemYellow
-        
+
         tabBar.tintColor = .label
 
         // We need to create a navigation-controller for each tab to allow navigation

@@ -8,6 +8,8 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    let sectionTitles: [String] = ["Trending Movies", "Trending TV", "Upcoming Movies", "Top Rated", "Popular"]
+
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
 
@@ -57,7 +59,7 @@ class HomeViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
         ]
 
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .label
     }
 
     override func viewDidLayoutSubviews() {
@@ -71,7 +73,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 20
+        return sectionTitles.count
     }
 
     // Number of rows
@@ -95,6 +97,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     // Section header height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+
+    // Section header title
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
+    }
+
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+
+        header.textLabel?.font = .systemFont(ofSize: 18, weight: .bold)
+        header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 20, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
+        header.textLabel?.textColor = .label
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

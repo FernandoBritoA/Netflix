@@ -50,7 +50,7 @@ class HeroHeaderUIView: UIView {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
             UIColor.clear.cgColor,
-            UIColor.systemBackground.cgColor,
+            UIColor.systemBackground.cgColor
         ]
         
         gradientLayer.frame = bounds
@@ -70,7 +70,7 @@ class HeroHeaderUIView: UIView {
         let playButtonConstraints = [
             playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 90),
             playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
-            //playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -90),
+            // playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -90),
             playButton.widthAnchor.constraint(equalToConstant: 100)
         ]
         
