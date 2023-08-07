@@ -21,7 +21,6 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getTrendingMovies()
 
         view.backgroundColor = .systemBackground
         view.addSubview(homeFeedTable)
@@ -70,8 +69,64 @@ class HomeViewController: UIViewController {
         homeFeedTable.frame = view.bounds
     }
     
+    
+}
+
+extension HomeViewController: TMDBCallerProtocol {
     func getTrendingMovies() {
         ApiCaller.shared.getTrendingMovies { results in
+            switch results {
+            case .success(let movies):
+                print(movies)
+            
+            case .failure(let error):
+                print(error)
+            
+            }
+        }
+    }
+    
+    func getTrendingTVSeries() {
+        ApiCaller.shared.getTrendingTVSeries { results in
+            switch results {
+            case .success(let tvSeries):
+                print(tvSeries)
+            
+            case .failure(let error):
+                print(error)
+            
+            }
+        }
+    }
+    
+    func getUpcomingMovies() {
+        ApiCaller.shared.getUpcomingMovies { results in
+            switch results {
+            case .success(let movies):
+                print(movies)
+            
+            case .failure(let error):
+                print(error)
+            
+            }
+        }
+    }
+    
+    func getPopularMovies() {
+        ApiCaller.shared.getPopularMovies { results in
+            switch results {
+            case .success(let movies):
+                print(movies)
+            
+            case .failure(let error):
+                print(error)
+            
+            }
+        }
+    }
+    
+    func getTopRatedMovies() {
+        ApiCaller.shared.getTopRatedMovies { results in
             switch results {
             case .success(let movies):
                 print(movies)

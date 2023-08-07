@@ -22,6 +22,7 @@
 		BF61CD0A2A807491009F4A88 /* ApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD092A807491009F4A88 /* ApiCaller.swift */; };
 		BF61CD0C2A807B91009F4A88 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD0B2A807B91009F4A88 /* Movie.swift */; };
 		BF61CD0E2A8085AC009F4A88 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD0D2A8085AC009F4A88 /* Extensions.swift */; };
+		BF61CD102A808788009F4A88 /* TVSerie.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD0F2A808788009F4A88 /* TVSerie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		BF61CD092A807491009F4A88 /* ApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCaller.swift; sourceTree = "<group>"; };
 		BF61CD0B2A807B91009F4A88 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		BF61CD0D2A8085AC009F4A88 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BF61CD0F2A808788009F4A88 /* TVSerie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSerie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				BF61CD0B2A807B91009F4A88 /* Movie.swift */,
+				BF61CD0F2A808788009F4A88 /* TVSerie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				BF61CD082A7F049D009F4A88 /* HeroHeaderUIView.swift in Sources */,
 				BF61CD0C2A807B91009F4A88 /* Movie.swift in Sources */,
 				BF61CCE62A7D739B009F4A88 /* MainTabBarViewController.swift in Sources */,
+				BF61CD102A808788009F4A88 /* TVSerie.swift in Sources */,
 				BF61CD0A2A807491009F4A88 /* ApiCaller.swift in Sources */,
 				BF61CCFD2A7D7909009F4A88 /* DownloadsViewController.swift in Sources */,
 				BF61CCE22A7D739B009F4A88 /* AppDelegate.swift in Sources */,
