@@ -9,7 +9,10 @@ import UIKit
 
 // TableView cell; this will contain a collection of new cells (movie gallery)
 class CollectionViewTableViewCell: UITableViewCell {
-    static let identifier = K.Home.cellIdentifier
+    static let identifier = K.Home.sectionCellID
+    
+    private var titles: [Title] = []
+
     
     private let collectionView: UICollectionView = {
         // A layout object that organizes items into a grid with optional header and footer views for each section.
@@ -20,7 +23,7 @@ class CollectionViewTableViewCell: UITableViewCell {
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
-        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collection.register(PosterCollectionViewCell.self, forCellWithReuseIdentifier: PosterCollectionViewCell.identifier)
         
         return collection
     }()
@@ -45,17 +48,29 @@ class CollectionViewTableViewCell: UITableViewCell {
         
         collectionView.frame = contentView.bounds
     }
+    
+    public func configure(with titles: [Title]){
+        self.titles = titles
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
 }
 
 extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .green
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCollectionViewCell.identifier, for: indexPath) as? PosterCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+
+         let posterPath = titles[indexPath.row].poster_path ?? ""
+        cell.configure(with: posterPath)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return titles.count
     }
 }

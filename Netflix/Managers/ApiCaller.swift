@@ -10,6 +10,7 @@ import Foundation
 struct Constants {
     static let API_KEY = "c9ea1080f4be4c799e73132220531fdc"
     static let baseURL = "https://api.themoviedb.org"
+    static let imageURL = "https://image.tmdb.org/t/p/w500"
 }
 
 enum APIError: Error {
@@ -22,19 +23,11 @@ enum MovieCollectionType: String {
     case popular = "popular"
 }
 
-protocol TMDBCallerProtocol {
-    func getTrendingMovies()
-    func getTrendingTVSeries()
-    func getUpcomingMovies()
-    func getPopularMovies()
-    func getTopRatedMovies()
-}
-
 class ApiCaller {
     static let shared = ApiCaller()
 
     // enum Result<Success, Failure> where Failure : Error
-    func getTrendingMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
+    func getTrendingMovies(completion: @escaping (Result<[Title], Error>) -> Void) {
         guard let url = URL(string: "\(Constants.baseURL)/3/trending/movie/day?api_key=\(Constants.API_KEY)") else {return}
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -45,18 +38,18 @@ class ApiCaller {
             do {
                 // This will print the raw JSON response
                 //let results = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                let response = try JSONDecoder().decode(FetchMoviesResponse.self, from: data)
+                let response = try JSONDecoder().decode(FetchTitlesResponse.self, from: data)
                 
                 completion(.success(response.results))
             } catch {
-                completion(.failure(error))
+                completion(.failure(APIError.failedToGetData))
             }
         }
         
         task.resume()
     }
     
-    func getTrendingTVSeries(completion: @escaping (Result<[TVSerie], Error>) -> Void) {
+    func getTrendingTVSeries(completion: @escaping (Result<[Title], Error>) -> Void) {
         guard let url = URL(string: "\(Constants.baseURL)/3/trending/tv/day?api_key=\(Constants.API_KEY)") else {return}
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -67,18 +60,18 @@ class ApiCaller {
             do {
                 // This will print the raw JSON response
                 //let results = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                let response = try JSONDecoder().decode(FetchSeriesResponse.self, from: data)
+                let response = try JSONDecoder().decode(FetchTitlesResponse.self, from: data)
                 
                 completion(.success(response.results))
             } catch {
-                completion(.failure(error))
+                completion(.failure(APIError.failedToGetData))
             }
         }
         
         task.resume()
     }
     
-    func getMoviesCollection(type: MovieCollectionType, completion: @escaping (Result<[Movie], Error>) -> Void){
+    func getMoviesCollection(type: MovieCollectionType, completion: @escaping (Result<[Title], Error>) -> Void){
         guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(type.rawValue)?api_key=\(Constants.API_KEY)") else {return}
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -89,11 +82,11 @@ class ApiCaller {
             do {
                 // This will print the raw JSON response
                 //let results = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                let response = try JSONDecoder().decode(FetchMoviesResponse.self, from: data)
+                let response = try JSONDecoder().decode(FetchTitlesResponse.self, from: data)
                 
                 completion(.success(response.results))
             } catch {
-                completion(.failure(error))
+                completion(.failure(APIError.failedToGetData))
             }
         }
         

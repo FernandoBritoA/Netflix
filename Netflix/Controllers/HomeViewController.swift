@@ -7,6 +7,14 @@
 
 import UIKit
 
+enum Sections: Int {
+    case TrendingMovies = 0
+    case TrendingTv = 1
+    case Popular = 2
+    case UpcomingMovies = 3
+    case TopRated = 4
+}
+
 class HomeViewController: UIViewController {
     let sectionTitles: [String] = ["Trending Movies", "Trending TV", "Popular", "Upcoming Movies", "Top Rated"]
 
@@ -15,6 +23,7 @@ class HomeViewController: UIViewController {
 
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
         table.showsVerticalScrollIndicator = false
+    
 
         return table
     }()
@@ -72,72 +81,6 @@ class HomeViewController: UIViewController {
     
 }
 
-extension HomeViewController: TMDBCallerProtocol {
-    func getTrendingMovies() {
-        ApiCaller.shared.getTrendingMovies { results in
-            switch results {
-            case .success(let movies):
-                print(movies)
-            
-            case .failure(let error):
-                print(error)
-            
-            }
-        }
-    }
-    
-    func getTrendingTVSeries() {
-        ApiCaller.shared.getTrendingTVSeries { results in
-            switch results {
-            case .success(let tvSeries):
-                print(tvSeries)
-            
-            case .failure(let error):
-                print(error)
-            
-            }
-        }
-    }
-    
-    func getUpcomingMovies() {
-        ApiCaller.shared.getMoviesCollection(type: .upcoming) { results in
-            switch results {
-            case .success(let movies):
-                print(movies)
-            
-            case .failure(let error):
-                print(error)
-            
-            }
-        }
-    }
-    
-    func getPopularMovies() {
-        ApiCaller.shared.getMoviesCollection(type: .popular) { results in
-            switch results {
-            case .success(let movies):
-                print(movies)
-            
-            case .failure(let error):
-                print(error)
-            
-            }
-        }
-    }
-    
-    func getTopRatedMovies() {
-        ApiCaller.shared.getMoviesCollection(type: .topRated) { results in
-            switch results {
-            case .success(let movies):
-                print(movies)
-            
-            case .failure(let error):
-                print(error)
-            
-            }
-        }
-    }
-}
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     // Number of sections
@@ -154,6 +97,68 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else {
             return UITableViewCell()
         }
+        
+        switch indexPath.section{
+        case Sections.TrendingMovies.rawValue:
+            ApiCaller.shared.getTrendingMovies { results in
+                switch results {
+                case .success(let titles):
+                    cell.configure(with: titles)
+                
+                case .failure(let error):
+                    print(error.localizedDescription)
+                
+                }
+            }
+        case Sections.TrendingTv.rawValue:
+            ApiCaller.shared.getTrendingTVSeries { results in
+                switch results {
+                case .success(let titles):
+                    cell.configure(with: titles)
+                
+                case .failure(let error):
+                    print(error.localizedDescription)
+                
+                }
+            }
+        case Sections.Popular.rawValue:
+            ApiCaller.shared.getMoviesCollection(type: .popular) { results in
+                switch results {
+                case .success(let titles):
+                    cell.configure(with: titles)
+                
+                case .failure(let error):
+                    print(error.localizedDescription)
+                
+                }
+            }
+        case Sections.UpcomingMovies.rawValue:
+            ApiCaller.shared.getMoviesCollection(type: .upcoming) { results in
+                switch results {
+                case .success(let titles):
+                    cell.configure(with: titles)
+                
+                case .failure(let error):
+                    print(error.localizedDescription)
+                
+                }
+            }
+        case Sections.TopRated.rawValue:
+            ApiCaller.shared.getMoviesCollection(type: .topRated) { results in
+            switch results {
+            case .success(let titles):
+                cell.configure(with: titles)
+            
+            case .failure(let error):
+                print(error.localizedDescription)
+            
+            }
+        }
+        default:
+            cell.configure(with: [])
+        }
+        
+        
 
         return cell
     }

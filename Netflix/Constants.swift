@@ -9,7 +9,8 @@ enum K {
     enum Home {
         static let title = "Home"
         
-        static let cellIdentifier = "CollectionViewTableViewCell"
+        static let sectionCellID = "CollectionViewTableViewCell"
+        static let posterCellID = "PosterCollectionViewCell"
     }
     
     enum Upcoming {
