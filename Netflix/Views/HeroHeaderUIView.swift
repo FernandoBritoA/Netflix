@@ -41,7 +41,6 @@ class HeroHeaderUIView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "heroImage")
         
         return imageView
     }()
@@ -64,6 +63,13 @@ class HeroHeaderUIView: UIView {
         addGradient()
         addSubview(playButton)
         addSubview(downloadButton)
+    }
+    
+    public func configure(with posterPath: String) {
+        guard let url = URL(string: "\(Constants.imageURL)\(posterPath)") else { return }
+        
+        // These sd_setImage method comes from SDWebImage package
+        heroImageView.sd_setImage(with: url)
     }
     
     private func applyConstraints() {

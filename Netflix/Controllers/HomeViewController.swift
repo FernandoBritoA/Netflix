@@ -16,6 +16,7 @@ enum Sections: Int {
 }
 
 class HomeViewController: UIViewController {
+    var trendingMovies: [Title] = []
     let sectionTitles: [String] = ["Trending Movies", "Trending TV", "Popular", "Upcoming Movies", "Top Rated"]
 
     private let homeFeedTable: UITableView = {
@@ -23,7 +24,6 @@ class HomeViewController: UIViewController {
 
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
         table.showsVerticalScrollIndicator = false
-    
 
         return table
     }()
@@ -32,17 +32,36 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
-        view.addSubview(homeFeedTable)
 
         configureNavbar()
 
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
 
-        // The table header will be the hero
-        // view.bounds.width = width = 100%
-        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
-        homeFeedTable.tableHeaderView = headerView
+        getInitalTableData()
+    }
+
+    func getInitalTableData() {
+        ApiCaller.shared.getTrendingMovies { results in
+            switch results {
+            case .success(var titles):
+                let mainMovie = titles.remove(at: 0)
+                self.trendingMovies = titles
+
+                DispatchQueue.main.async {
+                    self.view.addSubview(self.homeFeedTable)
+
+                    // The table header will be the hero
+                    // view.bounds.width = width = 100%
+                    let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 450))
+                    headerView.configure(with: mainMovie.poster_path ?? "")
+                    self.homeFeedTable.tableHeaderView = headerView
+                }
+
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
     private func configureNavbar() {
@@ -77,10 +96,7 @@ class HomeViewController: UIViewController {
         // Cover the whole bounds of our screen
         homeFeedTable.frame = view.bounds
     }
-    
-    
 }
-
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     // Number of sections
@@ -97,28 +113,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else {
             return UITableViewCell()
         }
-        
-        switch indexPath.section{
+
+        switch indexPath.section {
         case Sections.TrendingMovies.rawValue:
-            ApiCaller.shared.getTrendingMovies { results in
-                switch results {
-                case .success(let titles):
-                    cell.configure(with: titles)
-                
-                case .failure(let error):
-                    print(error.localizedDescription)
-                
-                }
-            }
+            cell.configure(with: trendingMovies)
+
         case Sections.TrendingTv.rawValue:
             ApiCaller.shared.getTrendingTVSeries { results in
                 switch results {
                 case .success(let titles):
                     cell.configure(with: titles)
-                
+
                 case .failure(let error):
                     print(error.localizedDescription)
-                
                 }
             }
         case Sections.Popular.rawValue:
@@ -126,10 +133,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 switch results {
                 case .success(let titles):
                     cell.configure(with: titles)
-                
+
                 case .failure(let error):
                     print(error.localizedDescription)
-                
                 }
             }
         case Sections.UpcomingMovies.rawValue:
@@ -137,28 +143,24 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 switch results {
                 case .success(let titles):
                     cell.configure(with: titles)
-                
+
                 case .failure(let error):
                     print(error.localizedDescription)
-                
                 }
             }
         case Sections.TopRated.rawValue:
             ApiCaller.shared.getMoviesCollection(type: .topRated) { results in
-            switch results {
-            case .success(let titles):
-                cell.configure(with: titles)
-            
-            case .failure(let error):
-                print(error.localizedDescription)
-            
+                switch results {
+                case .success(let titles):
+                    cell.configure(with: titles)
+
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
-        }
         default:
             cell.configure(with: [])
         }
-        
-        
 
         return cell
     }
