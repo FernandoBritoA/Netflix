@@ -100,7 +100,7 @@ extension HomeViewController: TMDBCallerProtocol {
     }
     
     func getUpcomingMovies() {
-        ApiCaller.shared.getUpcomingMovies { results in
+        ApiCaller.shared.getMoviesCollection(type: .upcoming) { results in
             switch results {
             case .success(let movies):
                 print(movies)
@@ -113,7 +113,7 @@ extension HomeViewController: TMDBCallerProtocol {
     }
     
     func getPopularMovies() {
-        ApiCaller.shared.getPopularMovies { results in
+        ApiCaller.shared.getMoviesCollection(type: .popular) { results in
             switch results {
             case .success(let movies):
                 print(movies)
@@ -126,7 +126,7 @@ extension HomeViewController: TMDBCallerProtocol {
     }
     
     func getTopRatedMovies() {
-        ApiCaller.shared.getTopRatedMovies { results in
+        ApiCaller.shared.getMoviesCollection(type: .topRated) { results in
             switch results {
             case .success(let movies):
                 print(movies)
