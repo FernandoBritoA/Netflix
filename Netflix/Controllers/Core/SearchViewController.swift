@@ -9,6 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     private var titles: [Title] = []
+    
     private let discoverTable: UITableView = {
         let table = UITableView()
         
@@ -16,18 +17,32 @@ class SearchViewController: UIViewController {
         
         return table
     }()
+    
+    private let searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: SearchResultsViewController())
+        controller.searchBar.placeholder = K.Search.searchPlaceholder
+        controller.searchBar.searchBarStyle = .minimal
+        
+        return controller
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
-        title = "Search"
+        title = K.Search.navigationBarTitle
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         
         view.addSubview(discoverTable)
         discoverTable.delegate = self
         discoverTable.dataSource = self
+        
+        navigationItem.searchController = searchController
+        navigationController?.navigationBar.tintColor = .label
+        
+        // Search
+        searchController.searchResultsUpdater = self
         
         fetchDiscover()
     }
@@ -83,4 +98,31 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return 140
     }
     
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        
+        // With this conditions we minimize api calls
+        guard let query = searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count >= 3,
+              let resultsController = searchController.searchResultsController as? SearchResultsViewController
+        else {return}
+                
+        ApiCaller.shared.search(with: query) { results in
+            switch results {
+            case .success(let titles):
+                
+                DispatchQueue.main.async {
+                    resultsController.titles = titles
+                    resultsController.searchResultsCollectionView.reloadData()
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

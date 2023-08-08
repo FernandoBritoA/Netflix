@@ -21,6 +21,8 @@ enum K {
     
     enum Search {
         static let title = "Top Search"
+        static let navigationBarTitle = "Search"
+        static let searchPlaceholder = "Search for a Movie or a TV show"
     }
     
     enum Downloads {
