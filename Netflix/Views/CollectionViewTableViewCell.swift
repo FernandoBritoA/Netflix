@@ -7,13 +7,18 @@
 
 import UIKit
 
+protocol CollectionViewTableViewCellDelegate: AnyObject {
+    func collectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: TitlePreviewViewModel)
+}
+
 // TableView cell; this will contain a collection of new cells (movie gallery)
 class CollectionViewTableViewCell: UITableViewCell {
+    weak var delegate: CollectionViewTableViewCellDelegate?
+    
     static let identifier = K.Home.sectionCellID
     
     private var titles: [Title] = []
 
-    
     private let collectionView: UICollectionView = {
         // A layout object that organizes items into a grid with optional header and footer views for each section.
         let layout = UICollectionViewFlowLayout()
@@ -72,5 +77,25 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titles.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.row]
+        guard let titleName = title.original_title ?? title.original_name else {return}
+        ApiCaller.shared.getMovieTrailer(with: titleName) { [weak self] results in
+            switch results {
+            case .success(let movie):
+                guard let safeSelf = self else {return}
+                
+                safeSelf.delegate?.collectionViewTableViewCellDidTapCell(safeSelf, viewModel: TitlePreviewViewModel(
+                    title: titleName,
+                    youtubeVideoId: movie.id.videoId ?? "",
+                    titleOverview: title.overview ?? ""))
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

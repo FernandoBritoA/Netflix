@@ -142,11 +142,12 @@ class ApiCaller {
         task.resume()
     }
     
-    func getMovie(with query: String, completion: @escaping (Result<VideoElement, Error>) -> Void) {
+    func getMovieTrailer(with query: String, completion: @escaping (Result<VideoElement, Error>) -> Void) {
+        let trailerQuery = "\(query) trailer"
         // Returns a new string made from the receiver by replacing all characters not in the specified set with percent-encoded characters.
-        guard let safeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        guard let urlQuery = trailerQuery.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         
-        guard let url = URL(string: "\(Constants.YouTubeBaseURL)?q=\(safeQuery)&key=\(Constants.YouTubeAPI_KEY)") else { return }
+        guard let url = URL(string: "\(Constants.YouTubeBaseURL)?q=\(urlQuery)&key=\(Constants.YouTubeAPI_KEY)") else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
