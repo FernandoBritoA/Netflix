@@ -142,7 +142,7 @@ class ApiCaller {
         task.resume()
     }
     
-    func getMovie(with query: String, completion: @escaping (Result<[VideoElement], Error>) -> Void) {
+    func getMovie(with query: String, completion: @escaping (Result<VideoElement, Error>) -> Void) {
         // Returns a new string made from the receiver by replacing all characters not in the specified set with percent-encoded characters.
         guard let safeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         
@@ -155,8 +155,9 @@ class ApiCaller {
             
             do {
                 let response = try JSONDecoder().decode(YoutubeSearchResponse.self, from: data)
+                let bestMatch = response.items[0]
                 
-                completion(.success(response.items))
+                completion(.success(bestMatch))
             } catch {
                 completion(.failure(error))
             }
