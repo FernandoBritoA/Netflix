@@ -92,4 +92,26 @@ class ApiCaller {
         
         task.resume()
     }
+    
+    func getDiscoverMovies(completion: @escaping (Result<[Title], Error>) -> Void){
+        guard let url = URL(string: "\(Constants.baseURL)/3/discover/movie?api_key=\(Constants.API_KEY)&sort_by=popularity.desc&include_adult=false&include_video=false&with_watch_monetization_types=flatrate&page=1") else {return}
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                // This will print the raw JSON response
+                //let results = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                let response = try JSONDecoder().decode(FetchTitlesResponse.self, from: data)
+                
+                completion(.success(response.results))
+            } catch {
+                completion(.failure(APIError.failedToGetData))
+            }
+        }
+        
+        task.resume()
+    }
 }

@@ -32,6 +32,6 @@ class MainTabBarViewController: UITabBarController {
         vc4.title = K.Downloads.title
 
         setViewControllers([vc1, vc2, vc3, vc4], animated: true)
-        self.selectedIndex = 1
+        self.selectedIndex = 2
     }
 }
