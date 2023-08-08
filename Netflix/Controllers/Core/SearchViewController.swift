@@ -64,7 +64,6 @@ class SearchViewController: UIViewController {
                     self?.discoverTable.reloadData()
                 }
                 
-
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -97,7 +96,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
     }
-    
 }
 
 extension SearchViewController: UISearchResultsUpdating {
@@ -109,7 +107,7 @@ extension SearchViewController: UISearchResultsUpdating {
               !query.trimmingCharacters(in: .whitespaces).isEmpty,
               query.trimmingCharacters(in: .whitespaces).count >= 3,
               let resultsController = searchController.searchResultsController as? SearchResultsViewController
-        else {return}
+        else { return }
                 
         ApiCaller.shared.search(with: query) { results in
             switch results {

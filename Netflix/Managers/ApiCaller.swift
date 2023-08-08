@@ -11,6 +11,8 @@ struct Constants {
     static let API_KEY = "c9ea1080f4be4c799e73132220531fdc"
     static let baseURL = "https://api.themoviedb.org"
     static let imageURL = "https://image.tmdb.org/t/p/w500"
+    static let YouTubeAPI_KEY = "AIzaSyBCiF3hH7Q-iYa0_GGsHOrC70dwzc6mIDk"
+    static let YouTubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search"
 }
 
 enum APIError: Error {
@@ -117,7 +119,7 @@ class ApiCaller {
     
     func search(with query: String, completion: @escaping (Result<[Title], Error>) -> Void) {
         // Returns a new string made from the receiver by replacing all characters not in the specified set with percent-encoded characters.
-        guard let safeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
+        guard let safeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         
         guard let url = URL(string: "\(Constants.baseURL)/3/search/movie?api_key=\(Constants.API_KEY)&include_adult=false&language=en-US&query=\(safeQuery)&page=1") else { return }
         
@@ -134,6 +136,29 @@ class ApiCaller {
                 completion(.success(response.results))
             } catch {
                 completion(.failure(APIError.failedToGetData))
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func getMovie(with query: String, completion: @escaping (Result<[VideoElement], Error>) -> Void) {
+        // Returns a new string made from the receiver by replacing all characters not in the specified set with percent-encoded characters.
+        guard let safeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        
+        guard let url = URL(string: "\(Constants.YouTubeBaseURL)?q=\(safeQuery)&key=\(Constants.YouTubeAPI_KEY)") else { return }
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                let response = try JSONDecoder().decode(YoutubeSearchResponse.self, from: data)
+                
+                completion(.success(response.items))
+            } catch {
+                completion(.failure(error))
             }
         }
         

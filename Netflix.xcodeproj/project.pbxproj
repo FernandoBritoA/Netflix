@@ -28,6 +28,7 @@
 		BF61CD192A819ADC009F4A88 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD182A819ADC009F4A88 /* TitleTableViewCell.swift */; };
 		BF61CD1B2A819F33009F4A88 /* TitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD1A2A819F33009F4A88 /* TitleViewModel.swift */; };
 		BF61CD1D2A81E5CB009F4A88 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD1C2A81E5CB009F4A88 /* SearchResultsViewController.swift */; };
+		BF61CD212A82B637009F4A88 /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61CD202A82B637009F4A88 /* YoutubeSearchResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		BF61CD182A819ADC009F4A88 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		BF61CD1A2A819F33009F4A88 /* TitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewModel.swift; sourceTree = "<group>"; };
 		BF61CD1C2A81E5CB009F4A88 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		BF61CD202A82B637009F4A88 /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				BF61CD0B2A807B91009F4A88 /* Title.swift */,
+				BF61CD202A82B637009F4A88 /* YoutubeSearchResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				BF61CD0E2A8085AC009F4A88 /* Extensions.swift in Sources */,
 				BF61CD062A7DA807009F4A88 /* CollectionViewTableViewCell.swift in Sources */,
 				BF61CD192A819ADC009F4A88 /* TitleTableViewCell.swift in Sources */,
+				BF61CD212A82B637009F4A88 /* YoutubeSearchResponse.swift in Sources */,
 				BF61CCF92A7D7760009F4A88 /* UpcomingViewController.swift in Sources */,
 				BF61CD122A816A16009F4A88 /* PosterCollectionViewCell.swift in Sources */,
 				BF61CD1B2A819F33009F4A88 /* TitleViewModel.swift in Sources */,
