@@ -138,6 +138,8 @@ extension SearchViewController: UISearchResultsUpdating {
               query.trimmingCharacters(in: .whitespaces).count >= 3,
               let resultsController = searchController.searchResultsController as? SearchResultsViewController
         else { return }
+        
+        resultsController.delegate = self
                 
         ApiCaller.shared.search(with: query) { results in
             switch results {
@@ -153,4 +155,16 @@ extension SearchViewController: UISearchResultsUpdating {
             }
         }
     }
+}
+
+extension SearchViewController: SearchResultsViewControllerDelegate {
+    func searchResultsViewControllerDidTapItem(_ viewModel: TitlePreviewViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
 }
