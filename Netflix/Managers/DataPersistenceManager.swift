@@ -14,6 +14,7 @@ import CoreData
 enum DatabaseError: Error {
     case failedToSaveData
     case failedToFetchData
+    case failedToDeleteData
 }
 
 class DataPersistenceManager {
@@ -68,6 +69,29 @@ class DataPersistenceManager {
             print(error.localizedDescription)
             
             completion(.failure(DatabaseError.failedToFetchData))
+        }
+    }
+    
+    func deleteTitle(with model: TitleItem, completion: @escaping (Result<Void, Error>) -> Void){
+        // Reference to the app delegate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        // Asking database manager to delete certain object
+        context.delete(model)
+        
+        // Confirm deletion
+        do {
+            try context.save()
+            
+            completion(.success(()))
+        } catch {
+            
+            
+            completion(.failure(DatabaseError.failedToDeleteData))
         }
     }
 }

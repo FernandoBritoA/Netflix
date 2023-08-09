@@ -113,4 +113,28 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle{
+        case .delete:
+            
+            DataPersistenceManager.shared.deleteTitle(with: titles[indexPath.row]) { [weak self] result in
+                switch result {
+                case .success():
+                    // We first remove the title from the array, then remove the element from the table view, or it will crash
+                    
+                    self?.titles.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    print("Successfully deleted item")
+                    
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            
+        default:
+            return
+        }
+    }
 }
