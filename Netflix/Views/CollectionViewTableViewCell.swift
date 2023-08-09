@@ -54,7 +54,7 @@ class CollectionViewTableViewCell: UITableViewCell {
         collectionView.frame = contentView.bounds
     }
     
-    public func configure(with titles: [Title]){
+    public func configure(with titles: [Title]) {
         self.titles = titles
         
         DispatchQueue.main.async {
@@ -62,7 +62,9 @@ class CollectionViewTableViewCell: UITableViewCell {
         }
     }
     
-    private func downloadItem(at indexPath: IndexPath){}
+    private func downloadItem(at indexPath: IndexPath) {
+        print(titles[indexPath.row])
+    }
 }
 
 extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -71,7 +73,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
 
-         let posterPath = titles[indexPath.row].poster_path ?? ""
+        let posterPath = titles[indexPath.row].poster_path ?? ""
         cell.configure(with: posterPath)
         
         return cell
@@ -85,11 +87,11 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let title = titles[indexPath.row]
-        guard let titleName = title.original_title ?? title.original_name else {return}
+        guard let titleName = title.original_title ?? title.original_name else { return }
         ApiCaller.shared.getMovieTrailer(with: titleName) { [weak self] results in
             switch results {
             case .success(let movie):
-                guard let safeSelf = self else {return}
+                guard let safeSelf = self else { return }
                 
                 safeSelf.delegate?.collectionViewTableViewCellDidTapCell(safeSelf, viewModel: TitlePreviewViewModel(
                     title: titleName,
