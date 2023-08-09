@@ -46,7 +46,7 @@ class DownloadsViewController: UIViewController {
         downloadedTable.frame = view.bounds
     }
     
-    private func fetchLocalStorageForDownloads(){
+    private func fetchLocalStorageForDownloads() {
         DataPersistenceManager.shared.fetchingTitlesFromDataBase { [weak self] result in
             switch result {
             case .success(let titles):
@@ -93,7 +93,7 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let title = titles[indexPath.row]
-        guard let titleName = title.original_title ?? title.original_name else {return}
+        guard let titleName = title.original_title ?? title.original_name else { return }
         
         ApiCaller.shared.getMovieTrailer(with: titleName) { [weak self] results in
             switch results {
@@ -105,7 +105,8 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
                 let viewModel = TitlePreviewViewModel(
                     title: titleName,
                     youtubeVideoId: movie.id.videoId ?? "",
-                    titleOverview: title.overview ?? "")
+                    titleOverview: title.overview ?? ""
+                )
                 
                 DispatchQueue.main.async {
                     let vc = TitlePreviewViewController()
@@ -120,7 +121,7 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        switch editingStyle{
+        switch editingStyle {
         case .delete:
             
             DataPersistenceManager.shared.deleteTitle(with: titles[indexPath.row]) { [weak self] result in
@@ -131,7 +132,6 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
                     self?.titles.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
                     print("Successfully deleted item")
-                    
                     
                 case .failure(let error):
                     print(error.localizedDescription)

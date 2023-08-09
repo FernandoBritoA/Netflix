@@ -36,14 +36,21 @@ class TitleTableViewCell: UITableViewCell {
         return button
     }()
     
-    private func applyConstraints(){
+    private func applyConstraints() {
         let titlePosterUIImageViewConstraints = [
+            titlePosterUIImageView.widthAnchor.constraint(equalToConstant: 100),
             titlePosterUIImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titlePosterUIImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            titlePosterUIImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            titlePosterUIImageView.widthAnchor.constraint(equalToConstant: 100),
+            
+            // The contentView of the table has an encapsulted height as a pre-setted value when the tableView loads that has
+            // a priority of 1000 which for sure won't be satisfied when there are number of constraints from top to bottom of the cell
+            // which are result in a different height value than the pre-setted one which will cause a conflict.
+            // Making the priority of the bottom constraint < 1000 will recover from this conflict until the table calculates the correct
+            // one from subviews of the cell.
+            // Then that 999 constraint will be satisfied without any breaks as the pre-con one no longer exists
+            titlePosterUIImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).withPriority(999),
         ]
-        
+       
         let titleLabelConstraints = [
             titleLabel.leadingAnchor.constraint(equalTo: titlePosterUIImageView.trailingAnchor, constant: 20),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -51,7 +58,7 @@ class TitleTableViewCell: UITableViewCell {
         
         let playTitleButtonConstraints = [
             playTitleButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            playTitleButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            playTitleButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ]
         
         NSLayoutConstraint.activate(titlePosterUIImageViewConstraints)
@@ -59,8 +66,8 @@ class TitleTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(playTitleButtonConstraints)
     }
     
-    public func configure(with model: TitleViewModel){
-        guard let url = URL(string: "\(Constants.imageURL)\(model.posterPath)") else {return}
+    public func configure(with model: TitleViewModel) {
+        guard let url = URL(string: "\(Constants.imageURL)\(model.posterPath)") else { return }
         
         // These sd_setImage method comes from SDWebImage package
         titlePosterUIImageView.sd_setImage(with: url)
@@ -78,6 +85,7 @@ class TitleTableViewCell: UITableViewCell {
         applyConstraints()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
