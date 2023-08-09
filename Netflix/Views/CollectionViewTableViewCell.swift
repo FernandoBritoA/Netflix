@@ -63,7 +63,18 @@ class CollectionViewTableViewCell: UITableViewCell {
     }
     
     private func downloadItem(at indexPath: IndexPath) {
-        print(titles[indexPath.row])
+        let title = titles[indexPath.row]
+        DataPersistenceManager.shared.downloadTitle(with: title) { result in
+            switch result {
+            case .success():
+                print("Downloaded content successfully")
+            
+            case .failure(let error):
+                print(error.localizedDescription)
+            
+            }
+        }
+        
     }
 }
 
