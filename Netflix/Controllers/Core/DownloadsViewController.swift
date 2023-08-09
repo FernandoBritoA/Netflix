@@ -32,6 +32,11 @@ class DownloadsViewController: UIViewController {
         downloadedTable.dataSource = self
         
         fetchLocalStorageForDownloads()
+        
+        // Register as an observer to the notification name
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(K.Notifications.downloads), object: nil, queue: nil) { _ in
+            self.fetchLocalStorageForDownloads()
+        }
     }
     
     override func viewDidLayoutSubviews() {

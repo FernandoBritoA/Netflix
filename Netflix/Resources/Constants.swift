@@ -28,4 +28,8 @@ enum K {
     enum Downloads {
         static let title = "Downloads"
     }
+    
+    enum Notifications {
+        static let downloads = "Downloads"
+    }
 }

@@ -64,10 +64,13 @@ class CollectionViewTableViewCell: UITableViewCell {
     
     private func downloadItem(at indexPath: IndexPath) {
         let title = titles[indexPath.row]
+        
         DataPersistenceManager.shared.downloadTitle(with: title) { result in
             switch result {
             case .success():
                 print("Downloaded content successfully")
+                // Dispatch mechanism that enables to broadcast information to registered observers
+                NotificationCenter.default.post(name: NSNotification.Name(K.Notifications.downloads), object: nil)
             
             case .failure(let error):
                 print(error.localizedDescription)
