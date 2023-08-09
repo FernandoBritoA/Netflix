@@ -12,7 +12,7 @@ class UpcomingViewController: UIViewController {
     private let upcomingTable: UITableView = {
         let table = UITableView()
         
-        table.register(TitleTableViewCell.self, forCellReuseIdentifier: K.Upcoming.sectionCellID)
+        table.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
         
         return table
     }()
@@ -63,7 +63,7 @@ extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.Upcoming.sectionCellID, for: indexPath) as? TitleTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TitleTableViewCell.identifier, for: indexPath) as? TitleTableViewCell else {
             return UITableViewCell()
         }
         
