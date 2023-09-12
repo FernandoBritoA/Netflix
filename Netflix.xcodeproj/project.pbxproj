@@ -62,6 +62,8 @@
 		BF61CD242A82F743009F4A88 /* TitlePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewModel.swift; sourceTree = "<group>"; };
 		BF61CD4A2A842002009F4A88 /* NetflixModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NetflixModel.xcdatamodel; sourceTree = "<group>"; };
 		BF61CD4C2A84222C009F4A88 /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
+		BFE2E13B2AB003F900400067 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BFE2E13C2AB0046300400067 /* netflix-demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "netflix-demo.gif"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,8 @@
 		BF61CCD52A7D739B009F4A88 = {
 			isa = PBXGroup;
 			children = (
+				BFE2E13C2AB0046300400067 /* netflix-demo.gif */,
+				BFE2E13B2AB003F900400067 /* README.md */,
 				BF61CCE02A7D739B009F4A88 /* Netflix */,
 				BF61CCDF2A7D739B009F4A88 /* Products */,
 			);
