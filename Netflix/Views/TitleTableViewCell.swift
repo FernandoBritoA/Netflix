@@ -21,7 +21,9 @@ class TitleTableViewCell: UITableViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
+        
         label.textColor = .label
+        label.numberOfLines = 3
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -52,13 +54,15 @@ class TitleTableViewCell: UITableViewCell {
         ]
        
         let titleLabelConstraints = [
-            titleLabel.leadingAnchor.constraint(equalTo: titlePosterUIImageView.trailingAnchor, constant: 20),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: titlePosterUIImageView.trailingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: playTitleButton.leadingAnchor, constant: -20),
         ]
         
         let playTitleButtonConstraints = [
-            playTitleButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            playTitleButton.widthAnchor.constraint(equalToConstant: 50),
             playTitleButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            playTitleButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
         NSLayoutConstraint.activate(titlePosterUIImageViewConstraints)
@@ -78,9 +82,15 @@ class TitleTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        contentView.clipsToBounds = true
+        
         contentView.addSubview(titlePosterUIImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(playTitleButton)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
         applyConstraints()
     }
